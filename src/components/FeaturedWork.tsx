@@ -3,8 +3,10 @@ import { PORTFOLIO_PROJECTS } from '../constants/portfolioProjects';
 import './FeaturedWork.css';
 
 export default function FeaturedWork() {
-  // Take the first 6 projects for the carousel
-  const projects = Object.values(PORTFOLIO_PROJECTS).slice(0, 6);
+  // Take the first 6 projects for the carousel, filtering out projects without coverImage
+  const projects = Object.values(PORTFOLIO_PROJECTS)
+    .filter((project): project is typeof project & { coverImage: string } => 'coverImage' in project)
+    .slice(0, 6);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -42,7 +44,7 @@ export default function FeaturedWork() {
               >
                 <div 
                   className="featured-work__image"
-                  style={project.coverImage ? { backgroundImage: `url(${project.coverImage})` } : undefined}
+                  style={{ backgroundImage: `url(${project.coverImage})` }}
                 >
                 </div>
               </div>
