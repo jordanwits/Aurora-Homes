@@ -111,11 +111,8 @@
 /* ========================================
    NAVIGATION BUTTONS
    ======================================== */
-.featured-work__nav-container {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  flex-shrink: 0;
+.featured-work__nav-mobile {
+  display: none;
 }
 
 .featured-work__nav {
@@ -173,10 +170,19 @@
     order: 1;
   }
 
-  .featured-work__nav-container {
+  /* Hide desktop nav buttons on mobile */
+  .featured-work__nav--prev,
+  .featured-work__nav--next {
+    display: none;
+  }
+
+  /* Show mobile nav wrapper */
+  .featured-work__nav-mobile {
+    display: flex;
     order: 2;
     justify-content: center;
     gap: var(--space-lg);
+    align-items: center;
   }
 
   .featured-work__nav {

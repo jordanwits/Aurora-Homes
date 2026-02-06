@@ -25,6 +25,17 @@ export default function FeaturedWork() {
       
       <div className="featured-work__carousel-wrapper fade-in-up">
         <div className="featured-work__carousel">
+          {/* Previous button */}
+          <button 
+            className="featured-work__nav featured-work__nav--prev"
+            onClick={goToPrevious}
+            aria-label="Previous slide"
+          >
+            <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 15l-5-5 5-5"/>
+            </svg>
+          </button>
+
           <div className="featured-work__carousel-container">
             {projects.map((project, index) => (
               <div
@@ -40,10 +51,21 @@ export default function FeaturedWork() {
             ))}
           </div>
 
-          <div className="featured-work__nav-container">
-            {/* Previous button */}
+          {/* Next button */}
+          <button 
+            className="featured-work__nav featured-work__nav--next"
+            onClick={goToNext}
+            aria-label="Next slide"
+          >
+            <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M8 15l5-5-5-5"/>
+            </svg>
+          </button>
+
+          {/* Mobile nav wrapper - only visible on mobile */}
+          <div className="featured-work__nav-mobile">
             <button 
-              className="featured-work__nav featured-work__nav--prev"
+              className="featured-work__nav featured-work__nav--prev-mobile"
               onClick={goToPrevious}
               aria-label="Previous slide"
             >
@@ -52,9 +74,8 @@ export default function FeaturedWork() {
               </svg>
             </button>
 
-            {/* Next button */}
             <button 
-              className="featured-work__nav featured-work__nav--next"
+              className="featured-work__nav featured-work__nav--next-mobile"
               onClick={goToNext}
               aria-label="Next slide"
             >
