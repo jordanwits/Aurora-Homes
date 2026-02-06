@@ -16,8 +16,8 @@ export function useHeroSlideshow() {
   const [layer0Index, setLayer0Index] = useState(0);
   const [layer1Index, setLayer1Index] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<number | null>(null);
+  const intervalRef = useRef<number | null>(null);
   const isTransitioningRef = useRef(false);
   const activeIndexRef = useRef(0);
   const layer0IndexRef = useRef(0);
@@ -55,7 +55,7 @@ export function useHeroSlideshow() {
         setActiveIndex(newActiveIndex);
         
         // After transition completes, update the hidden layer's image
-        timeoutRef.current = setTimeout(() => {
+        timeoutRef.current = window.setTimeout(() => {
           // The layer that's now hidden can be updated safely
           if (newActiveIndex === 1) {
             // Layer 0 is now hidden, update it to show the image after layer1Index
@@ -70,15 +70,15 @@ export function useHeroSlideshow() {
           }
           
           isTransitioningRef.current = false;
-        }, TRANSITION_DURATION);
+        }, TRANSITION_DURATION) as unknown as number;
       };
 
-      intervalRef.current = setInterval(startTransition, SLIDE_INTERVAL);
+      intervalRef.current = window.setInterval(startTransition, SLIDE_INTERVAL) as unknown as number;
     });
 
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
       isTransitioningRef.current = false;
     };
   }, []);
