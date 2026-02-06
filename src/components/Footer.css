@@ -1,0 +1,106 @@
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: var(--space-xl) 0 var(--space-md);
+}
+
+.footer__content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   BRAND SECTION
+   ======================================== */
+.footer__logo {
+  height: 40px;
+  width: auto;
+  margin-bottom: var(--space-sm);
+  display: block;
+}
+
+.footer__tagline {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* ========================================
+   FOOTER SECTIONS
+   ======================================== */
+.footer__section h4 {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer__section p {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-xs);
+}
+
+.footer__section a {
+  color: #ffffff;
+  transition: color var(--transition-fast);
+}
+
+.footer__section a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ========================================
+   SOCIAL LINKS
+   ======================================== */
+.footer__social {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.footer__social a {
+  font-size: var(--text-base);
+}
+
+/* ========================================
+   BOTTOM BAR
+   ======================================== */
+.footer__bottom {
+  padding-top: var(--space-md);
+  text-align: center;
+}
+
+.footer__bottom p {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .footer {
+    padding: var(--space-lg) 0 var(--space-md);
+  }
+  
+  .footer__content {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .footer__brand {
+    padding-bottom: var(--space-sm);
+  }
+  
+  .footer__logo {
+    height: 32px;
+  }
+}
