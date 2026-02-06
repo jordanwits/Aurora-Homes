@@ -111,6 +111,13 @@
 /* ========================================
    NAVIGATION BUTTONS
    ======================================== */
+.featured-work__nav-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-shrink: 0;
+}
+
 .featured-work__nav {
   background: transparent;
   border: none;
@@ -148,25 +155,37 @@
 
   .featured-work__carousel-wrapper {
     margin-top: var(--space-md);
-  }
-
-  .featured-work__carousel {
-    gap: var(--space-md);
     padding: 0 var(--space-md);
   }
 
+  .featured-work__carousel {
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: 0;
+    align-items: center;
+  }
+
   .featured-work__carousel-container {
+    height: auto;
     aspect-ratio: 16 / 9;
     min-height: 300px;
+    width: 100%;
+    order: 1;
+  }
+
+  .featured-work__nav-container {
+    order: 2;
+    justify-content: center;
+    gap: var(--space-lg);
   }
 
   .featured-work__nav {
-    padding: var(--space-xs);
+    padding: var(--space-sm);
   }
 
   .featured-work__nav svg {
-    width: 16px;
-    height: 16px;
+    width: 32px;
+    height: 32px;
   }
 
   .featured-work__project-name {

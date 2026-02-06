@@ -25,17 +25,6 @@ export default function FeaturedWork() {
       
       <div className="featured-work__carousel-wrapper fade-in-up">
         <div className="featured-work__carousel">
-          {/* Previous button */}
-          <button 
-            className="featured-work__nav featured-work__nav--prev"
-            onClick={goToPrevious}
-            aria-label="Previous slide"
-          >
-            <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 15l-5-5 5-5"/>
-            </svg>
-          </button>
-
           <div className="featured-work__carousel-container">
             {projects.map((project, index) => (
               <div
@@ -51,16 +40,29 @@ export default function FeaturedWork() {
             ))}
           </div>
 
-          {/* Next button */}
-          <button 
-            className="featured-work__nav featured-work__nav--next"
-            onClick={goToNext}
-            aria-label="Next slide"
-          >
-            <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M8 15l5-5-5-5"/>
-            </svg>
-          </button>
+          <div className="featured-work__nav-container">
+            {/* Previous button */}
+            <button 
+              className="featured-work__nav featured-work__nav--prev"
+              onClick={goToPrevious}
+              aria-label="Previous slide"
+            >
+              <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 15l-5-5 5-5"/>
+              </svg>
+            </button>
+
+            {/* Next button */}
+            <button 
+              className="featured-work__nav featured-work__nav--next"
+              onClick={goToNext}
+              aria-label="Next slide"
+            >
+              <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 15l5-5-5-5"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>
