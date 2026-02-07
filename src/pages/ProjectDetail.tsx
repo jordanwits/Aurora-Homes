@@ -40,11 +40,13 @@ export default function ProjectDetail() {
   const prevProject = hasImages && currentIndex >= 0 ? projectsWithImages[(currentIndex - 1 + projectsWithImages.length) % projectsWithImages.length] : null;
 
   const handleNextProject = () => {
+    if (!nextProject) return;
     scrollToTopInstant();
     navigate(`/projects/${nextProject.id}`);
   };
 
   const handlePrevProject = () => {
+    if (!prevProject) return;
     scrollToTopInstant();
     navigate(`/projects/${prevProject.id}`);
   };
@@ -62,7 +64,7 @@ export default function ProjectDetail() {
             ← Back to Projects
           </button>
           <h1 className="project-detail__title fade-in-up">{project.name}</h1>
-          {project.subtitle && (
+          {'subtitle' in project && project.subtitle && (
             <p className="project-detail__subtitle fade-in-up stagger-delay-1">{project.subtitle}</p>
           )}
         </div>
