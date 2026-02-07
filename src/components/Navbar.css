@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1200;
   transition: background-color var(--transition-base),
               backdrop-filter var(--transition-base),
               border-color var(--transition-base),
