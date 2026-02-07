@@ -33,6 +33,9 @@ export default function ProjectDetail() {
 
   const images = 'images' in project ? project.images || [] : [];
   const hasImages = images.length > 0;
+  const subtitle = 'subtitle' in project && typeof (project as { subtitle?: string }).subtitle === 'string' 
+    ? (project as { subtitle: string }).subtitle 
+    : null;
   
   // Only calculate navigation if project has images
   const currentIndex = hasImages ? projectsWithImages.findIndex((p) => p.id === projectId) : -1;
@@ -64,8 +67,8 @@ export default function ProjectDetail() {
             ← Back to Projects
           </button>
           <h1 className="project-detail__title fade-in-up">{project.name}</h1>
-          {'subtitle' in project && project.subtitle && (
-            <p className="project-detail__subtitle fade-in-up stagger-delay-1">{project.subtitle}</p>
+          {subtitle && (
+            <p className="project-detail__subtitle fade-in-up stagger-delay-1">{subtitle}</p>
           )}
         </div>
       </section>
