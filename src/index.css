@@ -60,6 +60,11 @@
    ======================================== */
 html {
   scroll-behavior: smooth;
+  height: 100%;
+  overflow-x: hidden;
+  /* Prevent overscroll on mobile */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Smooth page transitions */
@@ -85,6 +90,10 @@ body {
   background: var(--color-bg);
   line-height: 1.6;
   overflow-x: hidden;
+  /* Prevent overscroll on mobile */
+  overscroll-behavior-y: none;
+  position: relative;
+  min-height: 100%;
 }
 
 /* ========================================
@@ -253,6 +262,19 @@ a:hover {
     --text-3xl: 2rem;
     --text-4xl: 2.5rem;
     --text-5xl: 3rem;
+  }
+  
+  html {
+    /* Prevent mobile browser bounce/overscroll */
+    overscroll-behavior: none;
+    height: 100%;
+  }
+  
+  body {
+    /* Prevent mobile browser bounce/overscroll */
+    overscroll-behavior-y: none;
+    min-height: 100%;
+    height: auto;
   }
   
   .container {

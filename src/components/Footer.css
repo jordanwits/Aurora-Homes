@@ -89,6 +89,7 @@
 @media (max-width: 768px) {
   .footer {
     padding: var(--space-lg) 0 var(--space-md);
+    margin-bottom: 0;
   }
   
   .footer__content {
@@ -102,5 +103,10 @@
   
   .footer__logo {
     height: 32px;
+  }
+  
+  .footer__bottom {
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
 }
