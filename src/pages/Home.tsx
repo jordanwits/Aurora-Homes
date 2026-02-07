@@ -14,13 +14,7 @@ export default function Home() {
     const img = new Image();
     img.decoding = 'async';
     img.src = src;
-    // Not yet in TS DOM typings everywhere, but supported in modern browsers.
-    try {
-      // @ts-expect-error fetchPriority is not universally typed yet
-      img.fetchPriority = 'high';
-    } catch {
-      // ignore
-    }
+    img.fetchPriority = 'high';
     img.decode?.().catch(() => {});
   }, []);
   
