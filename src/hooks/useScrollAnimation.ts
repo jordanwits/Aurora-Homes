@@ -23,7 +23,9 @@ export function useScrollAnimation() {
             // to ensure CSS initial state is rendered first
             if (initiallyIntersecting.has(element)) {
               // Force a reflow to ensure initial CSS state is applied
-              void element.offsetHeight;
+              if (element instanceof HTMLElement) {
+                void element.offsetHeight;
+              }
               
               // Use double RAF to ensure browser has painted initial state
               requestAnimationFrame(() => {
