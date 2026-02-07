@@ -78,7 +78,7 @@ export default function ProjectDetail() {
         <section className="project-detail__images">
           {images.map((image, index) => (
             <div 
-              key={index} 
+              key={`${project.id}-${index}`} 
               className={`project-detail__image-wrapper fade-in-scale ${index % 3 === 1 ? 'stagger-delay-1' : index % 3 === 2 ? 'stagger-delay-2' : ''}`}
             >
               <img 

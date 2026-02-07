@@ -27,16 +27,35 @@ export default function Projects() {
     navigate(`/projects/${currentProject.id}`);
   };
 
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-    if (isInitialLoad) {
-      // After first image loads, mark initial load as complete
-      setTimeout(() => {
-        setIsInitialLoad(false);
-        setPrevIndex(currentIndex);
-      }, 100);
-    }
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    // Check if image is already complete (cached) - if so, add a small delay
+    // to ensure CSS classes are applied and animation plays
+    const isCached = img.complete && img.naturalHeight !== 0;
+    const delay = isCached ? 50 : 0;
+    
+    // Force a reflow to ensure CSS classes are applied before marking as loaded
+    // This fixes the issue where cached images load too quickly
+    setTimeout(() => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setImageLoaded(true);
+          if (isInitialLoad) {
+            // After first image loads, mark initial load as complete
+            setTimeout(() => {
+              setIsInitialLoad(false);
+              setPrevIndex(currentIndex);
+            }, 100);
+          }
+        });
+      });
+    }, delay);
   };
+
+  // Reset imageLoaded when currentIndex changes to ensure animation plays
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [currentIndex]);
 
   // Update prevIndex after transition completes
   useEffect(() => {
@@ -51,14 +70,18 @@ export default function Projects() {
 
   const goToNext = () => {
     setPrevIndex(currentIndex);
-    setImageLoaded(false);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+    // Force a reflow to ensure the fade-in class is applied before image loads
+    requestAnimationFrame(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+    });
   };
 
   const goToPrevious = () => {
     setPrevIndex(currentIndex);
-    setImageLoaded(false);
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+    // Force a reflow to ensure the fade-in class is applied before image loads
+    requestAnimationFrame(() => {
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+    });
   };
 
   return (
@@ -107,6 +130,10 @@ export default function Projects() {
               key={currentProject.id}
               onLoad={handleImageLoad}
               onLoadStart={() => setImageLoaded(false)}
+              onError={() => {
+                // Fallback: if image fails to load, still mark as loaded after a delay
+                setTimeout(() => setImageLoaded(true), 100);
+              }}
             />
             <div className={`projects__overlay ${imageLoaded ? 'projects__overlay--visible' : ''}`}>
               <h3 className="projects__name">{currentProject.name}</h3>
