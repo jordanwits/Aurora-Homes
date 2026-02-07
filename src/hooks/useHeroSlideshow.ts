@@ -33,6 +33,52 @@ export function useHeroSlideshow() {
   }, [layer1Index]);
 
   useEffect(() => {
+    const startTime = Date.now();
+    let firstTransitionScheduled = false;
+
+    const startTransition = () => {
+      if (isTransitioningRef.current) return;
+      
+      isTransitioningRef.current = true;
+      
+      // Cross-fade to the other layer
+      const newActiveIndex = activeIndexRef.current === 0 ? 1 : 0;
+      activeIndexRef.current = newActiveIndex;
+      setActiveIndex(newActiveIndex);
+      
+      // After transition completes, update the hidden layer's image
+      timeoutRef.current = window.setTimeout(() => {
+        // The layer that's now hidden can be updated safely
+        if (newActiveIndex === 1) {
+          // Layer 0 is now hidden, update it to show the image after layer1Index
+          const nextIndex = (layer1IndexRef.current + 1) % images.length;
+          layer0IndexRef.current = nextIndex;
+          setLayer0Index(nextIndex);
+        } else {
+          // Layer 1 is now hidden, update it to show the image after layer0Index
+          const nextIndex = (layer0IndexRef.current + 1) % images.length;
+          layer1IndexRef.current = nextIndex;
+          setLayer1Index(nextIndex);
+        }
+        
+        isTransitioningRef.current = false;
+      }, TRANSITION_DURATION) as unknown as number;
+    };
+
+    const scheduleFirstTransition = () => {
+      if (firstTransitionScheduled) return;
+      firstTransitionScheduled = true;
+
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, SLIDE_INTERVAL - elapsed);
+
+      // Schedule first transition after remaining time, then start regular interval
+      timeoutRef.current = window.setTimeout(() => {
+        startTransition();
+        intervalRef.current = window.setInterval(startTransition, SLIDE_INTERVAL) as unknown as number;
+      }, remaining) as unknown as number;
+    };
+
     // Preload all images
     const imagePromises = images.map((src) => {
       return new Promise((resolve) => {
@@ -44,38 +90,7 @@ export function useHeroSlideshow() {
     });
 
     Promise.all(imagePromises).then(() => {
-      const startTransition = () => {
-        if (isTransitioningRef.current) return;
-        
-        isTransitioningRef.current = true;
-        
-        // Cross-fade to the other layer
-        const newActiveIndex = activeIndexRef.current === 0 ? 1 : 0;
-        activeIndexRef.current = newActiveIndex;
-        setActiveIndex(newActiveIndex);
-        
-        // After transition completes, update the hidden layer's image
-        timeoutRef.current = window.setTimeout(() => {
-          // The layer that's now hidden can be updated safely
-          if (newActiveIndex === 1) {
-            // Layer 0 is now hidden, update it to show the image after layer1Index
-            const nextIndex = (layer1IndexRef.current + 1) % images.length;
-            layer0IndexRef.current = nextIndex;
-            setLayer0Index(nextIndex);
-          } else {
-            // Layer 1 is now hidden, update it to show the image after layer0Index
-            const nextIndex = (layer0IndexRef.current + 1) % images.length;
-            layer1IndexRef.current = nextIndex;
-            setLayer1Index(nextIndex);
-          }
-          
-          isTransitioningRef.current = false;
-        }, TRANSITION_DURATION) as unknown as number;
-      };
-
-      // Start the first transition immediately after preload, then set up interval
-      startTransition();
-      intervalRef.current = window.setInterval(startTransition, SLIDE_INTERVAL) as unknown as number;
+      scheduleFirstTransition();
     });
 
     return () => {
