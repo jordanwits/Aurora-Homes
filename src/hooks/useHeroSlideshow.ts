@@ -73,6 +73,8 @@ export function useHeroSlideshow() {
         }, TRANSITION_DURATION) as unknown as number;
       };
 
+      // Start the first transition immediately after preload, then set up interval
+      startTransition();
       intervalRef.current = window.setInterval(startTransition, SLIDE_INTERVAL) as unknown as number;
     });
 
