@@ -1,8 +1,8 @@
 // Portfolio project configuration
 export const PORTFOLIO_PROJECTS = {
-  RUAH_AFRRAME: {
+  RUAH_AFRAME: {
     id: 'ruah-afrrame',
-    name: 'Ruah Afrrame',
+    name: 'Ruah Aframe',
     mediaPath: '/portfolio/ruah-afrrame/',
     coverImage: '/portfolio/ruah-afrrame/ruahAframe-cover.webp',
     images: [
