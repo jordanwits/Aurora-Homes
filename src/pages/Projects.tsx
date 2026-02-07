@@ -135,8 +135,10 @@ export default function Projects() {
                 setTimeout(() => setImageLoaded(true), 100);
               }}
             />
-            <div className={`projects__overlay ${imageLoaded ? 'projects__overlay--visible' : ''}`}>
+            <div className={`projects__overlay projects__overlay--center ${imageLoaded ? 'projects__overlay--visible' : ''}`}>
               <h3 className="projects__name">{currentProject.name}</h3>
+            </div>
+            <div className={`projects__overlay projects__overlay--bottom ${imageLoaded ? 'projects__overlay--visible' : ''}`}>
               <div className="projects__counter">
                 {currentIndex + 1} / {projects.length}
               </div>
