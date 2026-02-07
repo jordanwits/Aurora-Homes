@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PORTFOLIO_PROJECTS } from '../constants/portfolioProjects';
+import { scrollToTopInstant } from '../utils/scroll';
 import './FeaturedWork.css';
 
 export default function FeaturedWork() {
+  const navigate = useNavigate();
   // Take the first 6 projects for the carousel, filtering out projects without coverImage
   const projects = Object.values(PORTFOLIO_PROJECTS)
     .filter((project): project is typeof project & { coverImage: string } => 'coverImage' in project)
@@ -15,6 +18,11 @@ export default function FeaturedWork() {
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  };
+
+  const handleProjectClick = (projectId: string) => {
+    scrollToTopInstant();
+    navigate(`/projects/${projectId}`);
   };
 
   return (
@@ -45,6 +53,16 @@ export default function FeaturedWork() {
                 <div 
                   className="featured-work__image"
                   style={{ backgroundImage: `url(${project.coverImage})` }}
+                  onClick={() => handleProjectClick(project.id)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${project.name} portfolio`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleProjectClick(project.id);
+                    }
+                  }}
                 >
                 </div>
               </div>
