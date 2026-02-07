@@ -1,4 +1,5 @@
 import FeaturedWork from '../components/FeaturedWork';
+import { useEffect } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow';
 import '../styles/App.css';
@@ -6,6 +7,22 @@ import '../styles/App.css';
 export default function Home() {
   useScrollAnimation();
   const { currentImage, nextImage, activeIndex } = useHeroSlideshow();
+  
+  // Pre-decode large background images to avoid scroll-time jank
+  useEffect(() => {
+    const src = '/Hands-bw-vintage.jpg';
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = src;
+    // Not yet in TS DOM typings everywhere, but supported in modern browsers.
+    try {
+      // @ts-expect-error fetchPriority is not universally typed yet
+      img.fetchPriority = 'high';
+    } catch {
+      // ignore
+    }
+    img.decode?.().catch(() => {});
+  }, []);
   
   return (
     <div className="app">
