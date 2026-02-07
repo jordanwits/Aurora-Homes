@@ -119,16 +119,21 @@
    ======================================== */
 .navbar__mobile-menu {
   position: fixed;
-  top: var(--nav-height-mobile);
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
   z-index: 999;
-  padding: var(--space-lg) var(--space-md);
+  padding-top: calc(var(--nav-height-mobile) + var(--space-lg));
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  padding-bottom: var(--space-lg);
   animation: slideDown 0.2s ease;
+  pointer-events: auto;
 }
 
 @keyframes slideDown {
@@ -149,6 +154,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: var(--space-xl);
+  margin-top: 0;
 }
 
 .navbar__mobile-menu a {
@@ -156,10 +165,16 @@
   font-weight: 400;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--nav-text-dark);
+  color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
   display: block;
   padding: var(--space-sm) 0;
+  text-align: center;
+  transition: opacity var(--transition-base);
+}
+
+.navbar__mobile-menu a:hover {
+  opacity: 0.8;
 }
 
 /* ========================================

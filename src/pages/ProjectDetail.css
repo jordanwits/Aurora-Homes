@@ -137,13 +137,28 @@
   }
   
   .project-detail__nav-buttons {
-    flex-direction: column;
+    flex-direction: row;
     gap: var(--space-md);
+    align-items: center;
   }
   
   .project-detail__nav {
-    width: 100%;
+    flex: 1;
     justify-content: space-between;
+    padding: var(--space-md);
+    font-size: var(--text-base);
+    min-height: 48px;
+    border: 1px solid rgba(139, 69, 19, 0.2);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .project-detail__nav-arrow {
+    font-size: var(--text-xl);
+  }
+  
+  .project-detail__nav-label {
+    font-size: var(--text-base);
   }
   
   .project-detail__nav--next {

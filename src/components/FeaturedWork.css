@@ -148,7 +148,7 @@
    ======================================== */
 @media (max-width: 768px) {
   .featured-work__title {
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
   }
 
   .featured-work__carousel-wrapper {
@@ -165,8 +165,8 @@
 
   .featured-work__carousel-container {
     height: auto;
-    aspect-ratio: 16 / 9;
-    min-height: 300px;
+    aspect-ratio: 4 / 3;
+    min-height: 450px;
     width: 100%;
     order: 1;
   }
