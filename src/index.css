@@ -58,6 +58,23 @@
 /* ========================================
    GLOBAL STYLES
    ======================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Smooth page transitions */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure smooth animations */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    animation-timing-function: ease-out;
+  }
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -134,6 +151,48 @@ a:hover {
 .fade-in-up.animate {
   opacity: 1 !important;
   transform: translateY(0) !important;
+}
+
+.fade-in {
+  opacity: 0 !important;
+  transition: opacity 1s ease-out !important;
+}
+
+.fade-in.animate {
+  opacity: 1 !important;
+}
+
+.fade-in-scale {
+  opacity: 0 !important;
+  transform: scale(0.95) !important;
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out !important;
+}
+
+.fade-in-scale.animate {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+.slide-in-left {
+  opacity: 0 !important;
+  transform: translateX(-40px) !important;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out !important;
+}
+
+.slide-in-left.animate {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+.slide-in-right {
+  opacity: 0 !important;
+  transform: translateX(40px) !important;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out !important;
+}
+
+.slide-in-right.animate {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
 }
 
 /* Hero specific animations (on page load) */

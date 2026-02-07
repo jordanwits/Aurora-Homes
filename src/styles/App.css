@@ -81,7 +81,7 @@
    ======================================== */
 .intro {
   background-color: #f5ebe0;
-  padding: 8rem 0;
+  padding: 12rem 0;
 }
 
 .intro .container {
@@ -258,7 +258,7 @@
   }
   
   .intro {
-    padding: 6rem 0;
+    padding: 8rem 0;
   }
   
   .intro__text {

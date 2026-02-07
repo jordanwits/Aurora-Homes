@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer__content">
           {/* Brand & Tagline */}
-          <div className="footer__brand">
+          <div className="footer__brand fade-in-up">
             <img 
               src="/AH White Text.png" 
               alt="Aurora Homes" 
@@ -16,7 +16,7 @@ export default function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div className="footer__section">
+          <div className="footer__section fade-in-up stagger-delay-1">
             <h4>Contact</h4>
             <p>
               <a href="tel:+1234567890">(123) 456-7890</a>
@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
 
           {/* Social Links */}
-          <div className="footer__section">
+          <div className="footer__section fade-in-up stagger-delay-2">
             <h4>Follow</h4>
             <div className="footer__social">
               <a href="#" target="_blank" rel="noopener noreferrer">
@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="footer__bottom">
+        <div className="footer__bottom fade-in">
           <p>&copy; {new Date().getFullYear()} Aurora Homes. All rights reserved.</p>
         </div>
       </div>

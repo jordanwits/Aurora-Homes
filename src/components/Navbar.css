@@ -45,9 +45,14 @@
 }
 
 .navbar__logo {
-  height: 32px;
+  height: 40px;
   width: auto;
   transition: opacity var(--transition-base);
+}
+
+/* Black logo (scrolled state) - bigger */
+.navbar--scrolled .navbar__logo {
+  height: 40px;
 }
 
 .navbar__logo:hover {
@@ -71,6 +76,7 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--nav-text-light);
+  text-decoration: none;
   transition: color var(--transition-base), opacity var(--transition-fast);
 }
 
@@ -151,6 +157,7 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--nav-text-dark);
+  text-decoration: none;
   display: block;
   padding: var(--space-sm) 0;
 }
@@ -173,6 +180,11 @@
   }
   
   .navbar__logo {
-    height: 28px;
+    height: 35px;
+  }
+  
+  /* Black logo on mobile - bigger */
+  .navbar--scrolled .navbar__logo {
+    height: 35px;
   }
 }

@@ -1,51 +1,64 @@
 import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+import { scrollToTopInstant } from '../utils/scroll';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      // Trigger transition after scrolling 40px
-      setIsScrolled(window.scrollY > 40);
+      // Trigger transition after scrolling 40px (only on home page)
+      if (location.pathname === '/') {
+        setIsScrolled(window.scrollY > 40);
+      } else {
+        // On other pages, navbar should be scrolled state by default
+        setIsScrolled(true);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Check initial position
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const navLinks = [
-    { label: 'Work', href: '#work' },
-    { label: 'Approach', href: '#approach' },
-    { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home', path: '/' },
+    { label: 'Projects', path: '/projects' },
+    { label: 'About', path: '/about' },
   ];
 
   const handleLinkClick = () => {
+    scrollToTopInstant();
     // Close mobile menu when a link is clicked
     setIsMobileMenuOpen(false);
   };
+
+  // Determine logo based on scrolled state and current page
+  const logoSrc = (location.pathname === '/' && !isScrolled) 
+    ? "/AH White Text.png" 
+    : "/AH Black Text.png";
 
   return (
     <nav className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
         {/* Brand */}
-        <a href="#" className="navbar__brand">
+        <Link to="/" className="navbar__brand" onClick={handleLinkClick}>
           <img 
-            src={isScrolled ? "/AH Black Text.png" : "/AH White Text.png"} 
+            src={logoSrc}
             alt="Aurora Homes" 
             className="navbar__logo"
           />
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <ul className="navbar__links">
           {navLinks.map((link) => (
-            <li key={link.href}>
-              <a href={link.href}>{link.label}</a>
+            <li key={link.path}>
+              <Link to={link.path} onClick={handleLinkClick}>{link.label}</Link>
             </li>
           ))}
         </ul>
@@ -67,10 +80,10 @@ export default function Navbar() {
         <div className="navbar__mobile-menu">
           <ul>
             {navLinks.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} onClick={handleLinkClick}>
+              <li key={link.path}>
+                <Link to={link.path} onClick={handleLinkClick}>
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

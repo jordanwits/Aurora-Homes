@@ -1,0 +1,309 @@
+.projects {
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+
+/* ========================================
+   INTRO SECTION (Large Whitespace Text)
+   ======================================== */
+.projects__intro {
+  padding-top: calc(var(--nav-height) + var(--space-2xl));
+  padding-bottom: var(--space-2xl);
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.projects__title {
+  font-size: var(--text-xl);
+  font-weight: 300;
+  text-align: center;
+  margin: 0 0 var(--space-xl) 0;
+  letter-spacing: 0.03em;
+  color: var(--color-text);
+  opacity: 0.95;
+  position: relative;
+  padding-bottom: var(--space-sm);
+  text-transform: uppercase;
+  display: inline-block;
+  width: auto;
+}
+
+.projects__title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.projects__text {
+  text-align: center;
+}
+
+.projects__text p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* ========================================
+   PROJECTS CAROUSEL SECTION
+   ======================================== */
+.projects__carousel {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--nav-height));
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.projects__carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects__image-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--nav-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.projects__image-container .projects__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Initial load animation */
+.projects__image-container.fade-in-scale {
+  opacity: 0;
+}
+
+.projects__image-container.fade-in-scale.animate {
+  opacity: 1;
+  transition: opacity 1.2s ease-out;
+}
+
+/* Fade transition for subsequent image changes */
+.projects__image-container.fade-transition {
+  opacity: 1;
+}
+
+.projects__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: #ffffff;
+}
+
+/* Default state - images are visible when not transitioning */
+.projects__image-container.fade-transition .projects__image {
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+
+/* Fade out previous image */
+.projects__image--fade-out {
+  opacity: 1 !important;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 1;
+}
+
+.projects__image-container.image-loaded .projects__image--fade-out {
+  opacity: 0 !important;
+}
+
+/* Fade in new image */
+.projects__image--fade-in {
+  opacity: 0 !important;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 2;
+}
+
+.projects__image-container.image-loaded .projects__image--fade-in {
+  opacity: 1 !important;
+}
+
+/* Initial load - single image */
+.projects__image-container.fade-in-scale .projects__image {
+  position: relative;
+  opacity: 0;
+}
+
+.projects__image-container.fade-in-scale.image-loaded .projects__image {
+  opacity: 1;
+}
+
+.projects__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+  padding: var(--space-xl) var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  z-index: 3;
+}
+
+.projects__overlay--visible {
+  opacity: 1;
+}
+
+.projects__name {
+  font-size: var(--text-2xl);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease-in-out 0.2s, transform 0.6s ease-in-out 0.2s;
+}
+
+.projects__overlay--visible .projects__name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.projects__counter {
+  font-size: var(--text-sm);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease-in-out 0.3s, transform 0.6s ease-in-out 0.3s;
+}
+
+.projects__overlay--visible .projects__counter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   NAVIGATION BUTTONS
+   ======================================== */
+.projects__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(calc(-50% - 4px));
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 300;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+  z-index: 10;
+  user-select: none;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.projects__nav:hover {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.4);
+  transform: translateY(calc(-50% - 4px)) scale(1.1);
+  transform-origin: center center;
+}
+
+.projects__nav--prev {
+  left: var(--space-md);
+}
+
+.projects__nav--next {
+  right: var(--space-md);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .projects__intro {
+    padding-top: calc(var(--nav-height-mobile) + var(--space-xl));
+    padding-bottom: var(--space-xl);
+  }
+  
+  .projects__title {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .projects__text p {
+    font-size: var(--text-lg);
+  }
+  
+  .projects__carousel {
+    min-height: calc(100vh - var(--nav-height-mobile));
+  }
+  
+  .projects__image-container {
+    height: calc(100vh - var(--nav-height-mobile));
+  }
+  
+  .projects__nav {
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+  }
+  
+  .projects__nav--prev {
+    left: var(--space-sm);
+  }
+  
+  .projects__nav--next {
+    right: var(--space-sm);
+  }
+  
+  .projects__name {
+    font-size: var(--text-xl);
+  }
+  
+  .projects__overlay {
+    padding: var(--space-lg) var(--space-sm) var(--space-md);
+  }
+}

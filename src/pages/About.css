@@ -1,0 +1,139 @@
+.about-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* ========================================
+   HERO SECTION WITH BACKGROUND IMAGE
+   ======================================== */
+.about-page__hero {
+  position: relative;
+  min-height: 75vh;
+  background-image: url('/Family.webp');
+  background-size: cover;
+  background-position: center 55%;
+  background-repeat: no-repeat;
+  padding-top: var(--nav-height);
+}
+
+.about-page__hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+  z-index: 1;
+}
+
+.about-page__title {
+  font-size: var(--text-4xl);
+  font-weight: 300;
+  margin: 0 0 var(--space-lg) 0;
+  letter-spacing: 0.05em;
+  color: #8B4513;
+  line-height: 1.2;
+  text-transform: lowercase;
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+
+/* ========================================
+   CONTENT SECTION
+   ======================================== */
+.about-page__content {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  background-color: #ffffff;
+}
+
+.about-page__content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.about-page__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.about-page__text p {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.about-page__signature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.about-page__name {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.about-page__role {
+  font-size: var(--text-base);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .about-page__hero {
+    min-height: 60vh;
+    padding-top: var(--nav-height-mobile);
+  }
+
+  .about-page__hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.25) 100%
+    );
+  }
+
+  .about-page__content {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+  }
+
+  .about-page__content-wrapper {
+    gap: var(--space-md);
+  }
+
+  .about-page__title {
+    font-size: var(--text-3xl);
+  }
+
+  .about-page__text p {
+    font-size: var(--text-base);
+  }
+
+  .about-page__name {
+    font-size: var(--text-lg);
+  }
+}

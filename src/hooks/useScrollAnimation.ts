@@ -16,10 +16,20 @@ export function useScrollAnimation() {
       }
     );
 
-    // Function to observe all fade-in-up elements
+    // Function to observe all animated elements
     const observeElements = () => {
-      const elements = document.querySelectorAll('.fade-in-up:not(.animate)');
-      elements.forEach((el) => observer.observe(el));
+      const selectors = [
+        '.fade-in-up:not(.animate)',
+        '.fade-in:not(.animate)',
+        '.fade-in-scale:not(.animate)',
+        '.slide-in-left:not(.animate)',
+        '.slide-in-right:not(.animate)'
+      ];
+      
+      selectors.forEach((selector) => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach((el) => observer.observe(el));
+      });
     };
 
     // Initial observation
