@@ -62,8 +62,10 @@ html {
   scroll-behavior: smooth;
   height: 100%;
   overflow-x: hidden;
-  /* Prevent overscroll on mobile */
-  overscroll-behavior: none;
+  /* Allow normal wheel/trackpad scrolling on desktop */
+  overscroll-behavior-y: auto;
+  /* Keep horizontal overscroll contained */
+  overscroll-behavior-x: none;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -90,8 +92,8 @@ body {
   background: var(--color-bg);
   line-height: 1.6;
   overflow-x: hidden;
-  /* Prevent overscroll on mobile */
-  overscroll-behavior-y: none;
+  /* Allow normal wheel/trackpad scrolling on desktop */
+  overscroll-behavior-y: auto;
   position: relative;
   min-height: 100%;
 }
@@ -265,14 +267,15 @@ a:hover {
   }
   
   html {
-    /* Prevent mobile browser bounce/overscroll */
-    overscroll-behavior: none;
+    /* Allow normal touch scrolling */
+    overscroll-behavior-y: auto;
+    overscroll-behavior-x: none;
     height: 100%;
   }
   
   body {
-    /* Prevent mobile browser bounce/overscroll */
-    overscroll-behavior-y: none;
+    /* Allow normal touch scrolling */
+    overscroll-behavior-y: auto;
     min-height: 100%;
     height: auto;
   }
