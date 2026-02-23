@@ -1,5 +1,5 @@
 import FeaturedWork from '../components/FeaturedWork';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow';
 import '../styles/App.css';
@@ -7,6 +7,32 @@ import '../styles/App.css';
 export default function Home() {
   useScrollAnimation();
   const { currentImage, nextImage, activeIndex } = useHeroSlideshow();
+  
+  // Intro text carousel options
+  const introTexts = [
+    {
+      id: 1,
+      text: 'We believe every piece of land carries its own character. Each home begins with listening—understanding the vision, the setting, and the life meant to unfold there. From that foundation, we craft spaces that feel rooted, intentional, and enduring.'
+    },
+    {
+      id: 2,
+      text: 'Every property has a story waiting to be revealed. We begin by listening—to your vision and to the land itself—seeking a design that brings both to life. What follows is a home shaped with intention, craftsmanship, and lasting integrity.'
+    },
+    {
+      id: 3,
+      text: 'Each project begins with a question: what wants to be built here? By listening to the land and to those who will call it home, we shape spaces that feel alive, grounded, and deeply intentional—crafted with care that stands the test of time.'
+    }
+  ];
+  
+  const [currentIntroIndex, setCurrentIntroIndex] = useState(0);
+  
+  const goToNextIntro = () => {
+    setCurrentIntroIndex((prevIndex) => (prevIndex + 1) % introTexts.length);
+  };
+  
+  const goToPreviousIntro = () => {
+    setCurrentIntroIndex((prevIndex) => (prevIndex - 1 + introTexts.length) % introTexts.length);
+  };
   
   // Pre-decode large background images to avoid scroll-time jank
   useEffect(() => {
@@ -40,13 +66,39 @@ export default function Home() {
       {/* Intro Section */}
       <section className="intro section">
         <div className="container">
-          <div className="intro__text fade-in-up">
-            <p>
-              We believe every piece of land carries its own character.
-            </p>
-            <p>
-              Each home begins with listening—understanding the vision, the setting, and the life meant to unfold there. From that foundation, we craft spaces that feel rooted, intentional, and enduring.
-            </p>
+          <div className="intro__carousel-wrapper">
+            <button 
+              className="intro__carousel-nav intro__carousel-nav--prev"
+              onClick={goToPreviousIntro}
+              aria-label="Previous intro text"
+            >
+              <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 15l-5-5 5-5"/>
+              </svg>
+            </button>
+            
+            <div className="intro__carousel-container">
+              {introTexts.map((text, index) => (
+                <div
+                  key={text.id}
+                  className={`intro__text-slide ${index === currentIntroIndex ? 'intro__text-slide--active' : ''}`}
+                >
+                  <div className="intro__text fade-in-up">
+                    <p>{text.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <button 
+              className="intro__carousel-nav intro__carousel-nav--next"
+              onClick={goToNextIntro}
+              aria-label="Next intro text"
+            >
+              <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 15l5-5-5-5"/>
+              </svg>
+            </button>
           </div>
         </div>
       </section>
