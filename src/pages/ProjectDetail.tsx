@@ -12,13 +12,27 @@ export default function ProjectDetail() {
   // Get all projects that have cover images and images array (for navigation), excluding Columbia Historic Renovations
   const projectsWithImages = Object.values(PORTFOLIO_PROJECTS).filter(
     (project): project is typeof project & { coverImage: string; images: string[] } => 
-      'coverImage' in project && 'images' in project && project.id !== 'columbia-historic-renovations'
-  );
+      'coverImage' in project && 'images' in project
+  ).filter((project) => project.id !== 'columbia-historic-renovations');
 
   // Find the project by ID from all projects, excluding Columbia Historic Renovations
   const project = Object.values(PORTFOLIO_PROJECTS).find(
-    (p) => p.id === projectId && p.id !== 'columbia-historic-renovations'
+    (p) => p.id === projectId
   );
+  
+  // Exclude Columbia Historic Renovations
+  if (project?.id === 'columbia-historic-renovations') {
+    return (
+      <div className="project-detail">
+        <div className="container">
+          <p>Project not found</p>
+          <button onClick={() => { scrollToTopInstant(); navigate('/projects'); }}>
+            Back to Projects
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (!project) {
     return (
