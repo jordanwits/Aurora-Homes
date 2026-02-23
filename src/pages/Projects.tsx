@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { PORTFOLIO_PROJECTS } from '../constants/portfolioProjects';
@@ -9,80 +9,63 @@ export default function Projects() {
   const navigate = useNavigate();
   useScrollAnimation();
   
-  // Get all projects that have cover images
+  // Get all projects that have cover images and images array, excluding Columbia Historic Renovations
   const projects = Object.values(PORTFOLIO_PROJECTS).filter(
-    (project): project is typeof project & { coverImage: string } => 
-      'coverImage' in project
+    (project): project is typeof project & { coverImage: string; images?: string[] } => 
+      'coverImage' in project && project.id !== 'columbia-historic-renovations'
   );
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
-  const [prevIndex, setPrevIndex] = useState(0);
-  const currentProject = projects[currentIndex];
-  const prevProject = projects[prevIndex];
+  // Track current image index for each project
+  const [projectImageIndices, setProjectImageIndices] = useState<Record<string, number>>({});
+  // Track if hovering over arrows to prevent overlay
+  const [hoveringArrow, setHoveringArrow] = useState<Record<string, boolean>>({});
 
-  const handleImageClick = () => {
-    scrollToTopInstant();
-    navigate(`/projects/${currentProject.id}`);
+  const getCurrentImageIndex = (projectId: string) => {
+    return projectImageIndices[projectId] || 0;
   };
 
-  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = e.currentTarget;
-    // Check if image is already complete (cached) - if so, add a small delay
-    // to ensure CSS classes are applied and animation plays
-    const isCached = img.complete && img.naturalHeight !== 0;
-    const delay = isCached ? 50 : 0;
-    
-    // Force a reflow to ensure CSS classes are applied before marking as loaded
-    // This fixes the issue where cached images load too quickly
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setImageLoaded(true);
-          if (isInitialLoad) {
-            // After first image loads, mark initial load as complete
-            setTimeout(() => {
-              setIsInitialLoad(false);
-              setPrevIndex(currentIndex);
-            }, 100);
-          }
-        });
-      });
-    }, delay);
-  };
-
-  // Reset imageLoaded when currentIndex changes to ensure animation plays
-  useEffect(() => {
-    setImageLoaded(false);
-  }, [currentIndex]);
-
-  // Update prevIndex after transition completes
-  useEffect(() => {
-    if (!isInitialLoad && imageLoaded && currentIndex !== prevIndex) {
-      const timer = setTimeout(() => {
-        setPrevIndex(currentIndex);
-      }, 800); // Match transition duration
-      return () => clearTimeout(timer);
+  const getProjectImages = (project: typeof projects[0]) => {
+    if ('images' in project && project.images && project.images.length > 0) {
+      return project.images;
     }
-  }, [currentIndex, prevIndex, imageLoaded, isInitialLoad]);
-
-
-  const goToNext = () => {
-    setPrevIndex(currentIndex);
-    // Force a reflow to ensure the fade-in class is applied before image loads
-    requestAnimationFrame(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
-    });
+    return [project.coverImage];
   };
 
-  const goToPrevious = () => {
-    setPrevIndex(currentIndex);
-    // Force a reflow to ensure the fade-in class is applied before image loads
-    requestAnimationFrame(() => {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
-    });
+  const goToNextImage = (projectId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const project = projects.find(p => p.id === projectId);
+    if (!project) return;
+    
+    const images = getProjectImages(project);
+    const currentIndex = getCurrentImageIndex(projectId);
+    const nextIndex = (currentIndex + 1) % images.length;
+    
+    setProjectImageIndices(prev => ({
+      ...prev,
+      [projectId]: nextIndex
+    }));
   };
+
+  const goToPreviousImage = (projectId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const project = projects.find(p => p.id === projectId);
+    if (!project) return;
+    
+    const images = getProjectImages(project);
+    const currentIndex = getCurrentImageIndex(projectId);
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    
+    setProjectImageIndices(prev => ({
+      ...prev,
+      [projectId]: prevIndex
+    }));
+  };
+
+  const handleProjectClick = (projectId: string) => {
+    scrollToTopInstant();
+    navigate(`/projects/${projectId}`);
+  };
+
 
   return (
     <div className="projects">
@@ -98,61 +81,87 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* Full Screen Image Carousel */}
-      <section className="projects__carousel">
-        <div className="projects__carousel-wrapper">
-          <button 
-            className="projects__nav projects__nav--prev"
-            onClick={goToPrevious}
-            aria-label="Previous project"
-          >
-            ‹
-          </button>
-          
-          <div 
-            className={`projects__image-container ${isInitialLoad ? 'fade-in-scale' : 'fade-transition'} ${imageLoaded ? 'image-loaded' : ''}`}
-            onClick={handleImageClick}
-          >
-            {/* Previous image fading out - only show when transitioning */}
-            {!isInitialLoad && currentIndex !== prevIndex && (
-              <img 
-                src={prevProject.coverImage} 
-                alt={prevProject.name}
-                className="projects__image projects__image--fade-out"
-                key={`prev-${prevProject.id}`}
-              />
-            )}
-            {/* Current image fading in */}
-            <img 
-              src={currentProject.coverImage} 
-              alt={currentProject.name}
-              className={`projects__image ${!isInitialLoad && currentIndex !== prevIndex ? 'projects__image--fade-in' : ''}`}
-              key={currentProject.id}
-              onLoad={handleImageLoad}
-              onLoadStart={() => setImageLoaded(false)}
-              onError={() => {
-                // Fallback: if image fails to load, still mark as loaded after a delay
-                setTimeout(() => setImageLoaded(true), 100);
-              }}
-            />
-            <div className={`projects__overlay projects__overlay--center ${imageLoaded ? 'projects__overlay--visible' : ''}`}>
-              <h3 className="projects__name">{currentProject.name}</h3>
-            </div>
-            <div className={`projects__overlay projects__overlay--bottom ${imageLoaded ? 'projects__overlay--visible' : ''}`}>
-              <div className="projects__counter">
-                {currentIndex + 1} / {projects.length}
+      {/* Projects Grid */}
+      <section className="projects__grid">
+        {projects.map((project, index) => {
+          const images = getProjectImages(project);
+          const currentImageIndex = getCurrentImageIndex(project.id);
+          const hasMultipleImages = images.length > 1;
+
+          return (
+            <div 
+              key={project.id}
+              className={`projects__project-item fade-in-scale ${index % 3 === 1 ? 'stagger-delay-1' : index % 3 === 2 ? 'stagger-delay-2' : ''}`}
+            >
+              <div className="projects__carousel-wrapper">
+                <div 
+                  className={`projects__image-container ${hoveringArrow[project.id] ? 'projects__image-container--arrow-hover' : ''}`}
+                  onClick={() => handleProjectClick(project.id)}
+                >
+                  {/* Render all images as slides */}
+                  {images.map((image, imgIndex) => (
+                    <div
+                      key={`${project.id}-slide-${imgIndex}`}
+                      className={`projects__slide ${imgIndex === currentImageIndex ? 'projects__slide--active' : ''}`}
+                    >
+                      <img 
+                        src={image} 
+                        alt={`${project.name} - Image ${imgIndex + 1}`}
+                        className="projects__image"
+                      />
+                    </div>
+                  ))}
+                  
+                  {/* Hover overlay with project name */}
+                  <div className="projects__overlay projects__overlay--center">
+                    <h3 className="projects__name">{project.name}</h3>
+                  </div>
+
+                  {/* Image counter - only show if multiple images */}
+                  {hasMultipleImages && (
+                    <div className="projects__image-counter">
+                      {currentImageIndex + 1} / {images.length}
+                    </div>
+                  )}
+
+                  {/* Carousel navigation buttons - only show if multiple images */}
+                  {hasMultipleImages && (
+                    <>
+                      <button 
+                        className="projects__carousel-nav projects__carousel-nav--prev"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          goToPreviousImage(project.id, e);
+                        }}
+                        onMouseEnter={() => setHoveringArrow(prev => ({ ...prev, [project.id]: true }))}
+                        onMouseLeave={() => setHoveringArrow(prev => ({ ...prev, [project.id]: false }))}
+                        aria-label={`Previous image for ${project.name}`}
+                      >
+                        <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 15l-5-5 5-5"/>
+                        </svg>
+                      </button>
+                      <button 
+                        className="projects__carousel-nav projects__carousel-nav--next"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          goToNextImage(project.id, e);
+                        }}
+                        onMouseEnter={() => setHoveringArrow(prev => ({ ...prev, [project.id]: true }))}
+                        onMouseLeave={() => setHoveringArrow(prev => ({ ...prev, [project.id]: false }))}
+                        aria-label={`Next image for ${project.name}`}
+                      >
+                        <svg width="48" height="48" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M8 15l5-5-5-5"/>
+                        </svg>
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-
-          <button 
-            className="projects__nav projects__nav--next"
-            onClick={goToNext}
-            aria-label="Next project"
-          >
-            ›
-          </button>
-        </div>
+          );
+        })}
       </section>
     </div>
   );

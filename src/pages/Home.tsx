@@ -40,9 +40,14 @@ export default function Home() {
       {/* Intro Section */}
       <section className="intro section">
         <div className="container">
-          <p className="intro__text fade-in-up">
-            We believe in building homes that are anything but cookie-cutter. Each project begins with listening—understanding your vision, your site, and the story you want your home to tell. From there, we craft spaces that marry thoughtful design with enduring quality.
-          </p>
+          <div className="intro__text fade-in-up">
+            <p>
+              We believe every piece of land carries its own character.
+            </p>
+            <p>
+              Each home begins with listening—understanding the vision, the setting, and the life meant to unfold there. From that foundation, we craft spaces that feel rooted, intentional, and enduring.
+            </p>
+          </div>
         </div>
       </section>
 
