@@ -46,8 +46,8 @@
   /* Layout */
   --container-max: 1280px;
   --container-narrow: 800px;
-  --nav-height: 80px;
-  --nav-height-mobile: 64px;
+  --nav-height: 96px;
+  --nav-height-mobile: 76px;
   
   /* Transitions */
   --transition-fast: 150ms ease;

@@ -5,10 +5,13 @@ import { PORTFOLIO_PROJECTS } from '../constants/portfolioProjects';
 import { scrollToTopInstant } from '../utils/scroll';
 import './Projects.css';
 
+type ProjectsTab = 'featured' | 'builds';
+
 export default function Projects() {
   const navigate = useNavigate();
   useScrollAnimation();
-  
+  const [activeTab, setActiveTab] = useState<ProjectsTab>('featured');
+
   // Get all projects that have cover images and images array, excluding Columbia Historic Renovations
   const projects = Object.values(PORTFOLIO_PROJECTS).filter(
     (project): project is typeof project & { coverImage: string; images?: string[] } => 
@@ -70,19 +73,55 @@ export default function Projects() {
   return (
     <div className="projects">
       {/* Large Text Section */}
-      <section className="projects__intro">
+      <section
+        className={`projects__intro${activeTab === 'builds' ? ' projects__intro--builds-only' : ''}`}
+      >
         <div className="container--narrow">
-          <h1 className="projects__title fade-in-up">Featured Projects</h1>
-          <div className="projects__text fade-in-up stagger-delay-1">
-            <p>
-              Each custom home we build is a reflection of our commitment to thoughtful design and enduring quality. From concept to completion, we craft spaces that embody elegance, sophistication, and the unique vision of every client.
-            </p>
+          <div
+            className={`projects__tabs${activeTab === 'builds' ? ' projects__tabs--solo' : ''}`}
+            role="tablist"
+            aria-label="Browse projects"
+          >
+            <button
+              type="button"
+              role="tab"
+              id="projects-tab-featured"
+              aria-selected={activeTab === 'featured'}
+              aria-controls="projects-panel-featured"
+              className={`projects__tab ${activeTab === 'featured' ? 'projects__tab--active' : ''}`}
+              onClick={() => setActiveTab('featured')}
+            >
+              Featured Projects
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="projects-tab-builds"
+              aria-selected={activeTab === 'builds'}
+              aria-controls="projects-panel-builds"
+              className={`projects__tab ${activeTab === 'builds' ? 'projects__tab--active' : ''}`}
+              onClick={() => setActiveTab('builds')}
+            >
+              Builds in Progress
+            </button>
           </div>
+          {activeTab === 'featured' && (
+            <div
+              className="projects__text fade-in-up stagger-delay-1"
+              id="projects-panel-featured"
+              role="tabpanel"
+              aria-labelledby="projects-tab-featured"
+            >
+              <p>
+                Each custom home we build is a reflection of our commitment to thoughtful design and enduring quality. From concept to completion, we craft spaces that embody elegance, sophistication, and the unique vision of every client.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Projects Grid */}
-      <section className="projects__grid">
+      {activeTab === 'featured' && (
+        <section className="projects__grid" aria-label="Featured project gallery">
         {projects.map((project, index) => {
           const images = getProjectImages(project);
           const currentImageIndex = getCurrentImageIndex(project.id);
@@ -107,7 +146,7 @@ export default function Projects() {
                       <img 
                         src={image} 
                         alt={`${project.name} - Image ${imgIndex + 1}`}
-                        className="projects__image"
+                        className={`projects__image${project.id === 'scarlets-mountain-road' ? ' projects__image--anchor-bottom' : ''}`}
                       />
                     </div>
                   ))}
@@ -162,7 +201,31 @@ export default function Projects() {
             </div>
           );
         })}
-      </section>
+        </section>
+      )}
+
+      {activeTab === 'builds' && (
+        <section
+          className="projects__builds-panel projects__builds-panel--near-tabs"
+          id="projects-panel-builds"
+          role="tabpanel"
+          aria-labelledby="projects-tab-builds"
+        >
+          <div className="projects__project-item fade-in-scale">
+            <div className="projects__carousel-wrapper">
+              <div className="projects__image-container projects__image-container--builds-static">
+                <div className="projects__slide projects__slide--active">
+                  <img
+                    src="/BuildProgress.jpg"
+                    alt="Custom home construction in progress"
+                    className="projects__image"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

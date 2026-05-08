@@ -146,7 +146,7 @@ export default function Navbar() {
     <>
       <nav className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
         <div className="navbar__container">
-          {/* Brand */}
+          {/* Brand (text logo, left) */}
           <Link to="/" className="navbar__brand" onClick={handleLinkClick}>
             <img 
               src={logoSrc}
@@ -155,28 +155,45 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="navbar__links">
-            {navLinks.map((link) => (
-              <li key={link.path}>
-                <Link to={link.path} onClick={handleLinkClick}>{link.label}</Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className="navbar__toggle"
-            type="button"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="navbar-mobile-menu"
+          {/* Center mark — grid column keeps this truly centered */}
+          <Link
+            to="/"
+            className="navbar__center-mark"
+            onClick={handleLinkClick}
+            aria-label="Aurora Homes home"
           >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+            <img
+              src="/AI-Stag.png"
+              alt=""
+              className="navbar__center-mark-img"
+              aria-hidden="true"
+            />
+          </Link>
+
+          <div className="navbar__end">
+            {/* Desktop Navigation */}
+            <ul className="navbar__links">
+              {navLinks.map((link) => (
+                <li key={link.path}>
+                  <Link to={link.path} onClick={handleLinkClick}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              className="navbar__toggle"
+              type="button"
+              onClick={toggleMobileMenu}
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="navbar-mobile-menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </div>
       </nav>
 

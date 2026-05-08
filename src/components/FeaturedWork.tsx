@@ -8,7 +8,10 @@ export default function FeaturedWork() {
   const navigate = useNavigate();
   // Take the first 6 projects for the carousel, filtering out projects without coverImage
   const projects = Object.values(PORTFOLIO_PROJECTS)
-    .filter((project): project is typeof project & { coverImage: string } => 'coverImage' in project)
+    .filter(
+      (project): project is typeof project & { coverImage: string } =>
+        'coverImage' in project && project.id !== 'monteagle'
+    )
     .slice(0, 6);
   const [currentIndex, setCurrentIndex] = useState(0);
 

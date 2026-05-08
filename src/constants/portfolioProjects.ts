@@ -10,6 +10,7 @@ export const PORTFOLIO_PROJECTS = {
       '/portfolio/ruah-afrrame/dji_fly_20251003_144702_0131_1759524601834_photo.JPG.jpg',
       '/portfolio/ruah-afrrame/dji_fly_20251003_144714_0132_1759524601463_photo.JPG.jpg',
       '/portfolio/ruah-afrrame/dji_fly_20251003_144754_0134_1759524601078_photo.JPG.jpg',
+      '/portfolio/ruah-afrrame/SunsetAframe.webp',
       '/portfolio/ruah-afrrame/dji_fly_20251003_144914_0139_1759524599239_photo.JPG.jpg',
       '/portfolio/ruah-afrrame/IMG_0379.jpg.jpg',
       '/portfolio/ruah-afrrame/IMG_0546.jpg.jpg',
@@ -17,7 +18,8 @@ export const PORTFOLIO_PROJECTS = {
       '/portfolio/ruah-afrrame/IMG_0574.jpg.jpg',
       '/portfolio/ruah-afrrame/IMG_0597.jpg.jpg',
       '/portfolio/ruah-afrrame/IMG_0605.jpg.jpg',
-      '/portfolio/ruah-afrrame/tempImagejQbwVL.png.jpg',
+      '/portfolio/ruah-afrrame/BathroomAframe.webp',
+      '/portfolio/ruah-afrrame/IslandAframe.webp',
     ],
   },
   MONTEAGLE: {
@@ -67,9 +69,8 @@ export const PORTFOLIO_PROJECTS = {
     id: 'altamont-build',
     name: 'Altamont Build',
     mediaPath: '/portfolio/altamont-build/',
-    coverImage: '/portfolio/altamont-build/altomont-cover.webp',
+    coverImage: '/portfolio/altamont-build/6-377 Valley View Dr - 006.jpg.jpg',
     images: [
-      '/portfolio/altamont-build/altomont-cover.webp',
       '/portfolio/altamont-build/6-377 Valley View Dr - 006.jpg.jpg',
       '/portfolio/altamont-build/11-377 Valley View Dr - 011.jpg.jpg',
       '/portfolio/altamont-build/21-377 Valley View Dr - 021.jpg.jpg',
@@ -78,7 +79,6 @@ export const PORTFOLIO_PROJECTS = {
       '/portfolio/altamont-build/31-377 Valley View Dr - 031.jpg.jpg',
       '/portfolio/altamont-build/35-377 Valley View Dr - 035.jpg.jpg',
       '/portfolio/altamont-build/47-377 Valley View Dr - 047.jpg.jpg',
-      '/portfolio/altamont-build/50-377 Valley View Dr - 050.jpg.jpg',
     ],
   },
   COLUMBIA_HISTORIC_RENOVATIONS: {

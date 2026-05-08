@@ -13,22 +13,54 @@
   text-align: center;
 }
 
-.projects__title {
+.projects__intro--builds-only {
+  padding-bottom: var(--space-md);
+}
+
+.projects__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--space-xl);
+  margin: 0 0 var(--space-xl) 0;
+}
+
+.projects__tabs--solo {
+  margin-bottom: 0;
+}
+
+.projects__tab {
+  font: inherit;
   font-size: var(--text-xl);
   font-weight: 300;
   text-align: center;
-  margin: 0 0 var(--space-xl) 0;
   letter-spacing: 0.03em;
   color: var(--color-text);
-  opacity: 0.95;
-  position: relative;
-  padding-bottom: var(--space-sm);
   text-transform: uppercase;
-  display: inline-block;
-  width: auto;
+  opacity: 0.55;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 0 var(--space-sm) 0;
+  margin: 0;
+  position: relative;
 }
 
-.projects__title::after {
+.projects__tab:hover {
+  opacity: 0.8;
+}
+
+.projects__tab:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.projects__tab--active {
+  opacity: 0.95;
+}
+
+.projects__tab--active::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -36,6 +68,20 @@
   width: 100%;
   height: 1px;
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.projects__builds-panel {
+  width: 100%;
+  padding: var(--space-lg) 0 var(--space-md) 0;
+  background-color: #ffffff;
+}
+
+.projects__builds-panel--near-tabs {
+  padding-top: var(--space-sm);
+}
+
+.projects__image-container--builds-static {
+  cursor: default;
 }
 
 .projects__text {
@@ -123,6 +169,11 @@
   object-fit: cover;
   display: block;
   background-color: #ffffff;
+}
+
+/* Scarlets Mountain Road: keep the bottom of the photo visible at all breakpoints */
+.projects__image--anchor-bottom {
+  object-position: center bottom;
 }
 
 /* Hover overlay with project name */
@@ -265,9 +316,21 @@
     padding-bottom: var(--space-xl);
   }
   
-  .projects__title {
-    font-size: var(--text-lg);
+  .projects__tabs {
+    gap: var(--space-lg);
     margin-bottom: var(--space-lg);
+  }
+
+  .projects__tabs--solo {
+    margin-bottom: 0;
+  }
+
+  .projects__intro--builds-only {
+    padding-bottom: var(--space-md);
+  }
+
+  .projects__tab {
+    font-size: var(--text-lg);
   }
   
   .projects__text p {
@@ -277,6 +340,15 @@
   .projects__grid {
     gap: var(--space-md);
     padding: var(--space-md) 0;
+  }
+  
+  .projects__builds-panel {
+    padding: var(--space-md) 0;
+  }
+
+  .projects__builds-panel--near-tabs {
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-md);
   }
   
   .projects__carousel-wrapper {
