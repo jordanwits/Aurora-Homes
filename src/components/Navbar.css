@@ -236,13 +236,13 @@
     height: var(--nav-height-mobile);
     padding: 0 var(--space-sm);
     column-gap: var(--space-xs);
+    grid-template-columns: 1fr auto;
   }
 
-  .navbar__center-mark-img {
-    height: 56px;
-    max-height: calc(var(--nav-height-mobile) - 12px);
+  .navbar__center-mark {
+    display: none;
   }
-  
+
   .navbar__links {
     display: none;
   }
