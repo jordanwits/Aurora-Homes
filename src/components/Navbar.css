@@ -74,10 +74,6 @@
   transition: opacity var(--transition-base);
 }
 
-.navbar__center-mark:hover .navbar__center-mark-img {
-  opacity: 0.85;
-}
-
 .navbar__logo {
   height: 40px;
   width: auto;

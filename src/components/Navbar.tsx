@@ -155,20 +155,14 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Center mark — grid column keeps this truly centered */}
-          <Link
-            to="/"
-            className="navbar__center-mark"
-            onClick={handleLinkClick}
-            aria-label="Aurora Homes home"
-          >
+          {/* Center mark — decorative; home is the text logo link */}
+          <span className="navbar__center-mark" aria-hidden="true">
             <img
               src="/AI-Stag.png"
               alt=""
               className="navbar__center-mark-img"
-              aria-hidden="true"
             />
-          </Link>
+          </span>
 
           <div className="navbar__end">
             {/* Desktop Navigation */}
