@@ -84,6 +84,16 @@
   cursor: default;
 }
 
+.projects__builds-title {
+  font-size: var(--text-xl);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  text-align: center;
+  margin-top: var(--space-sm);
+}
+
 .projects__text {
   text-align: center;
 }

@@ -55,7 +55,7 @@ export default function FeaturedWork() {
               >
                 <div 
                   className="featured-work__image"
-                  style={{ backgroundImage: `url(${project.coverImage})` }}
+                  style={{ backgroundImage: `url('${project.coverImage}')` }}
                   onClick={() => handleProjectClick(project.id)}
                   role="button"
                   tabIndex={0}

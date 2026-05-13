@@ -224,6 +224,7 @@ export default function Projects() {
               </div>
             </div>
           </div>
+          <h3 className="projects__builds-title">Columbia TN</h3>
         </section>
       )}
     </div>

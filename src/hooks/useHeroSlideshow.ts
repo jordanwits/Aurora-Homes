@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 const images = [
   '/AuroraH-hero.webp',
-  '/AframeFront.webp',
+  '/portfolio/ruah-afrrame/SunsetAframe.webp',
   '/santeFeBath.webp',
   '/backDeck.webp',
   '/SanteFe-livingRoom.webp',
