@@ -82,6 +82,10 @@
   display: block;
 }
 
+.project-detail__image--contain {
+  object-fit: contain;
+}
+
 @media (max-width: 1400px) {
   .project-detail__image {
     max-width: 90%;

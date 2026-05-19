@@ -80,6 +80,17 @@
   padding-top: var(--space-sm);
 }
 
+.projects__builds-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.projects__builds-item {
+  width: 100%;
+}
+
 .projects__image-container--builds-static {
   cursor: default;
 }
@@ -181,9 +192,8 @@
   background-color: #ffffff;
 }
 
-/* Scarlets Mountain Road: keep the bottom of the photo visible at all breakpoints */
-.projects__image--anchor-bottom {
-  object-position: center bottom;
+.projects__image--contain {
+  object-fit: contain;
 }
 
 /* Hover overlay with project name */

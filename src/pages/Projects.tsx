@@ -7,6 +7,21 @@ import './Projects.css';
 
 type ProjectsTab = 'featured' | 'builds';
 
+const BUILDS_IN_PROGRESS = [
+  {
+    id: 'columbia-tn',
+    title: 'Columbia TN',
+    image: '/BuildProgress.jpg',
+    alt: 'Custom home construction in progress — Columbia TN',
+  },
+  {
+    id: 'roberts-bend',
+    title: 'Roberts Bend',
+    image: '/RobertsBend.jpg',
+    alt: 'Custom home construction in progress — Roberts Bend',
+  },
+] as const;
+
 export default function Projects() {
   const navigate = useNavigate();
   useScrollAnimation();
@@ -146,7 +161,7 @@ export default function Projects() {
                       <img 
                         src={image} 
                         alt={`${project.name} - Image ${imgIndex + 1}`}
-                        className={`projects__image${project.id === 'scarlets-mountain-road' ? ' projects__image--anchor-bottom' : ''}`}
+                        className={`projects__image${image.includes('SsFrontDoor') ? ' projects__image--contain' : ''}`}
                       />
                     </div>
                   ))}
@@ -211,20 +226,28 @@ export default function Projects() {
           role="tabpanel"
           aria-labelledby="projects-tab-builds"
         >
-          <div className="projects__project-item fade-in-scale">
-            <div className="projects__carousel-wrapper">
-              <div className="projects__image-container projects__image-container--builds-static">
-                <div className="projects__slide projects__slide--active">
-                  <img
-                    src="/BuildProgress.jpg"
-                    alt="Custom home construction in progress"
-                    className="projects__image"
-                  />
+          <div className="projects__builds-list">
+            {BUILDS_IN_PROGRESS.map((build, index) => (
+              <div key={build.id} className="projects__builds-item">
+                <div
+                  className={`projects__project-item fade-in-scale${index > 0 ? ' stagger-delay-1' : ''}`}
+                >
+                  <div className="projects__carousel-wrapper">
+                    <div className="projects__image-container projects__image-container--builds-static">
+                      <div className="projects__slide projects__slide--active">
+                        <img
+                          src={build.image}
+                          alt={build.alt}
+                          className="projects__image"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <h3 className="projects__builds-title">{build.title}</h3>
               </div>
-            </div>
+            ))}
           </div>
-          <h3 className="projects__builds-title">Columbia TN</h3>
         </section>
       )}
     </div>

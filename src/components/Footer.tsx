@@ -19,27 +19,11 @@ export default function Footer() {
           <div className="footer__section fade-in-up stagger-delay-1">
             <h4>Contact</h4>
             <p>
-              <a href="tel:+1234567890">(123) 456-7890</a>
+              <a href="tel:+16156691442">615-669-1442</a>
             </p>
             <p>
               <a href="mailto:info@aurorahomes.com">info@aurorahomes.com</a>
             </p>
-          </div>
-
-          {/* Social Links */}
-          <div className="footer__section fade-in-up stagger-delay-2">
-            <h4>Follow</h4>
-            <div className="footer__social">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                Instagram
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                Facebook
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                LinkedIn
-              </a>
-            </div>
           </div>
         </div>
 

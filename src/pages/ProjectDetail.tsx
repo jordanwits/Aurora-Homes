@@ -100,7 +100,7 @@ export default function ProjectDetail() {
               <img 
                 src={image} 
                 alt={`${project.name} - Image ${index + 1}`}
-                className="project-detail__image"
+                className={`project-detail__image${image.includes('SsFrontDoor') ? ' project-detail__image--contain' : ''}`}
                 loading={index === 0 ? 'eager' : 'lazy'}
               />
             </div>

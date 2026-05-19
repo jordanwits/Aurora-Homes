@@ -21,17 +21,6 @@ export const PORTFOLIO_PROJECTS = {
       '/portfolio/ruah-afrrame/IslandAframe.webp',
     ],
   },
-  MONTEAGLE: {
-    id: 'monteagle',
-    name: 'Monteagle',
-    mediaPath: '/portfolio/monteagle/',
-    coverImage: '/portfolio/monteagle/monteagle-cover.webp',
-    images: [
-      '/portfolio/monteagle/monteagle-cover.webp',
-      '/portfolio/monteagle/TylerHagy_TH-EXT-03.jpg.webp.jpg',
-      '/portfolio/monteagle/TylerHagy_TH-EXT-05.jpg.webp.jpg',
-    ],
-  },
   SANTE_FE_BUILD: {
     id: 'sante-fe-build',
     name: 'Sante Fe Build',
@@ -53,17 +42,6 @@ export const PORTFOLIO_PROJECTS = {
       '/portfolio/sante-fe-build/125-web-or-mls-2932 New Hwy 7 - 026.jpg.jpg',
     ],
   },
-  SCARLETS_MOUNTAIN_ROAD: {
-    id: 'scarlets-mountain-road',
-    name: 'Scarlets Mountain Road',
-    mediaPath: '/portfolio/scarlets-mountain-road/',
-    coverImage: '/portfolio/scarlets-mountain-road/scarletsMtns-cover.webp',
-    images: [
-      '/portfolio/scarlets-mountain-road/scarletsMtns-cover.webp',
-      '/portfolio/scarlets-mountain-road/3860399_1_2.webp',
-      '/portfolio/scarlets-mountain-road/3860399_2.webp',
-    ],
-  },
   ALTAMONT_BUILD: {
     id: 'altamont-build',
     name: 'Altamont Build',
@@ -78,6 +56,29 @@ export const PORTFOLIO_PROJECTS = {
       '/portfolio/altamont-build/31-377 Valley View Dr - 031.jpg.jpg',
       '/portfolio/altamont-build/35-377 Valley View Dr - 035.jpg.jpg',
       '/portfolio/altamont-build/47-377 Valley View Dr - 047.jpg.jpg',
+    ],
+  },
+  SCHOOL_STREET: {
+    id: 'school-street',
+    name: 'School Street',
+    mediaPath: '/portfolio/SchoolStreet/',
+    coverImage: '/portfolio/SchoolStreet/SsCover.jpg',
+    images: [
+      '/portfolio/SchoolStreet/SsCover.jpg',
+      '/portfolio/SchoolStreet/SsFrontDoor.jpg',
+      '/portfolio/SchoolStreet/SsEntrance.jpg',
+      '/portfolio/SchoolStreet/SsKitchen.jpg',
+      '/portfolio/SchoolStreet/SsLivingRoom.jpg',
+    ],
+  },
+  MONTEAGLE: {
+    id: 'monteagle',
+    name: 'Monteagle',
+    mediaPath: '/portfolio/monteagle/',
+    coverImage: '/portfolio/monteagle/TylerHagy_TH-EXT-03.jpg.webp.jpg',
+    images: [
+      '/portfolio/monteagle/TylerHagy_TH-EXT-03.jpg.webp.jpg',
+      '/portfolio/monteagle/TylerHagy_TH-EXT-05.jpg.webp.jpg',
     ],
   },
   COLUMBIA_HISTORIC_RENOVATIONS: {

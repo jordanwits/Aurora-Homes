@@ -10,7 +10,9 @@ export default function FeaturedWork() {
   const projects = Object.values(PORTFOLIO_PROJECTS)
     .filter(
       (project): project is typeof project & { coverImage: string } =>
-        'coverImage' in project && project.id !== 'monteagle'
+        'coverImage' in project &&
+        project.id !== 'monteagle' &&
+        project.id !== 'columbia-historic-renovations'
     )
     .slice(0, 6);
   const [currentIndex, setCurrentIndex] = useState(0);
